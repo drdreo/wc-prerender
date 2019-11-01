@@ -1,0 +1,26 @@
+{
+  "name": "wc-prerender",
+  "version": "1.0.0",
+  "description": "My master thesis project regarding pre-rendering of Web Components",
+  "author": "Andreas Hahn",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node server.ts",
+    "build": "ts-node prerender.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^12.12.3",
+    "express": "^4.17.1",
+    "puppeteer": "^2.0.0",
+    "ts-node": "^8.4.1",
+    "typescript": "^3,.6.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drdreo/wc-prerender.git"
+  },
+  "keywords": [
+    "webcomponents"
+  ]
+}
