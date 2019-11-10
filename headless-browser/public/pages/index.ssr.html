@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <title>WC Prerender</title>
     <script src="../components/my-hello.js"></script>
@@ -9,17 +11,19 @@
 <my-hello greeting="Sias" data-ssr="serialized"><span>
             <span data-greeting="">Sias</span>,
             <strong>Felix</strong>!
-            </span><template type="ssr-light-dom">Felix</template><script type="ssr-data">{"greeting":"Sias"}</script></my-hello>
-
+            </span>
+    <template type="ssr-light-dom">Felix</template>
+    <script type="ssr-data">{"greeting":"Sias"}</script>
+</my-hello>
 
 
 <script>function hydrate() {
     // @ts-ignore
-    const elements = [...document.querySelectorAll('[data-ssr="serialized"]')];
+    const elements = [...document.querySelectorAll("[data-ssr=\"serialized\"]")];
     for (const el of elements) {
-        const lightDom = el.querySelector('[type="ssr-light-dom"]');
+        const lightDom = el.querySelector("[type=\"ssr-light-dom\"]");
         const lightDomContent = lightDom && lightDom.content;
-        const dataElement = el.querySelector('[type="ssr-data"]');
+        const dataElement = el.querySelector("[type=\"ssr-data\"]");
         const dataContent = dataElement && dataElement.innerText;
         const data = dataContent && JSON.parse(dataContent);
         el.childNodes.forEach(node => {
@@ -33,6 +37,8 @@
         data && Object.keys(data).forEach(key => {
             el[key] = data[key];
         });
-        el.setAttribute('data-ssr', 'hydrated');
+        el.setAttribute("data-ssr", "hydrated");
     }
-}; hydrate();</script></body></html>
+};hydrate();</script>
+</body>
+</html>

@@ -1,14 +1,15 @@
-import { serialize } from './serialize';
-
 const path = require('path');
-const puppeteer = require('puppeteer');
 const fs = require('fs');
+const puppeteer = require('puppeteer');
+
+import { serialize } from './serialize';
 import { rehydrate } from './hydrate';
 
-(async (fileName) => {
+async function prerender(fileName: string) {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
+    // puppeteer console.log handler
     page.on('console', async msg => {
         const args = await msg.args();
         for (const arg of args) {
@@ -23,7 +24,9 @@ import { rehydrate } from './hydrate';
         }
     });
 
+    // when the page was loaded, serialize the body content and write it to a file
     page.on('load', async (...args) => {
+
         await page.$eval('body', serialize);
         const pageContent = await page.content();
 
@@ -38,4 +41,9 @@ import { rehydrate } from './hydrate';
     });
 
     await page.goto('file://' + path.join(__dirname, fileName));
-})('/public/pages/index.html');
+}
+
+prerender('/public/pages/index.html')
+    .then(() => {
+        console.log('Pre-rendering finished!');
+    });
