@@ -1,5 +1,5 @@
 # Headless Browser
-This utilizes a headless browser to prerender the web component.
+This utilizes a headless browser(puppeteer) to pre-render the web component.
 
 [Article](https://medium.com/@treshugart/%C3%A5server-side-rendering-web-components-e5df705f3f48)
 

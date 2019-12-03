@@ -26,4 +26,5 @@ function hydrate() {
     }
 }
 
-export const rehydrate = `<script>${hydrate.toString()}; hydrate();</script>`;
+export const rehydrate = `<script>${hydrate.toString()}
+hydrate();</script>`;

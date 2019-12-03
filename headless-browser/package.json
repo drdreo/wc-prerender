@@ -8,7 +8,9 @@
     "start": "ts-node server.ts",
     "render": "ts-node prerender.ts"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@types/puppeteer": "^2.0.0"
+  },
   "devDependencies": {
     "express": "^4.17.1",
     "puppeteer": "^2.0.0"

@@ -1,29 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
-    <title>WC Prerender</title>
+    <title>Headless Browser | WC Pre-Render</title>
     <script src="../components/my-hello.js"></script>
+    <script src="../components/real-counter.js"></script>
+    <script src="../components/color-text.js"></script>
 </head>
 <body>
 
 <h1>Index.HTML</h1>
 <my-hello greeting="Sias" data-ssr="serialized"><span>
-            <span data-greeting="">Sias</span>,
+            <span data-greeting="" aria-label="greeting">Sias</span>,
             <strong>Felix</strong>!
-            </span>
-    <template type="ssr-light-dom">Felix</template>
-    <script type="ssr-data">{"greeting":"Sias"}</script>
-</my-hello>
+            </span><template type="ssr-light-dom">Felix</template><script type="ssr-data">{"greeting":"Sias"}</script></my-hello>
+
+<real-counter data-ssr="serialized"><color-text data-ssr="serialized"><style>*{color: cornflowerblue;}</style>0<template type="ssr-light-dom">0</template></color-text></real-counter>
+
 
 
 <script>function hydrate() {
     // @ts-ignore
-    const elements = [...document.querySelectorAll("[data-ssr=\"serialized\"]")];
+    const elements = [...document.querySelectorAll('[data-ssr="serialized"]')];
     for (const el of elements) {
-        const lightDom = el.querySelector("[type=\"ssr-light-dom\"]");
+        const lightDom = el.querySelector('[type="ssr-light-dom"]');
         const lightDomContent = lightDom && lightDom.content;
-        const dataElement = el.querySelector("[type=\"ssr-data\"]");
+        const dataElement = el.querySelector('[type="ssr-data"]');
         const dataContent = dataElement && dataElement.innerText;
         const data = dataContent && JSON.parse(dataContent);
         el.childNodes.forEach(node => {
@@ -37,8 +37,6 @@
         data && Object.keys(data).forEach(key => {
             el[key] = data[key];
         });
-        el.setAttribute("data-ssr", "hydrated");
+        el.setAttribute('data-ssr', 'hydrated');
     }
-};hydrate();</script>
-</body>
-</html>
+}; hydrate();</script></body></html>

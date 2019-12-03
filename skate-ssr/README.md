@@ -5,3 +5,7 @@ The way how skate.js renders web components.
 
 ## Run
 Enter `npm run render` in your terminal.
+Enter `npm start` in your terminal.
+
+## TODO
+* fix `module.exports` in component for browser support

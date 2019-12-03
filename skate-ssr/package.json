@@ -5,7 +5,8 @@
   "author": "Andreas Hahn",
   "license": "MIT",
   "scripts": {
-    "render": "ts-node serialize.ts"
+    "start": "ts-node server.ts",
+    "render": "ts-node prerender.ts"
   },
   "dependencies": {
     "@skatejs/ssr": "^0.19.11"
@@ -17,5 +18,8 @@
   "keywords": [
     "webcomponents",
     "prerendering"
-  ]
+  ],
+  "devDependencies": {
+    "express": "latest"
+  }
 }

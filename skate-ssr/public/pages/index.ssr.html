@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Skate/SSR Pre-render</title>
+    <script src="../components/my-hello_comp.js"></script>
+    <script src="../components/real-counter_comp.js"></script>
+    <script src="../components/color-text_comp.js"></script>
+</head>
+<body><script>function __ssr() {var r,s=document.currentScript,f=s.parentNode;h=f.parentNode;f.removeChild(s);h.removeChild(f);r=h.attachShadow({mode:h.getAttribute('mode')||'open'});while(f&&f.firstChild)r.appendChild(f.firstChild);}</script>
+
+<h1>Skate/SSR Index.HTML</h1>
+
+<my-hello greeting="Sias"><shadowroot><span>
+            <span data-greeting="">Sias</span>,
+            <strong><slot></slot></strong>!
+            </span><script>__ssr()</script></shadowroot>Felix</my-hello><real-counter><shadowroot><div><color-text><shadowroot><style>*{color: cornflowerblue;}</style>
+        <b><slot></slot></b><script>__ssr()</script></shadowroot>0</color-text>!</div><script>__ssr()</script></shadowroot></real-counter></body>
+</html>

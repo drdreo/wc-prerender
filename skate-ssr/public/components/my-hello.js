@@ -1,8 +1,9 @@
 class Hello extends HTMLElement {
+
     connectedCallback() {
         this.attachShadow({mode: "open"});
         this.shadowRoot.innerHTML = `<span>
-            <span data-greeting aria-label="greeting">${this.getAttribute("greeting")}</span>,
+            <span data-greeting>${this.getAttribute("greeting")}</span>,
             <strong><slot></slot></strong>!
             </span>`;
     }
@@ -17,4 +18,5 @@ class Hello extends HTMLElement {
     }
 }
 
-window.customElements.define("my-hello", Hello);
+customElements.define("my-hello", Hello);
+module.exports = Hello;

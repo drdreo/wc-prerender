@@ -1,4 +1,5 @@
 class Hello extends HTMLElement {
+
     connectedCallback() {
         this.attachShadow({mode: "open"});
         this.shadowRoot.innerHTML = `<span>
@@ -17,7 +18,4 @@ class Hello extends HTMLElement {
     }
 }
 
-
 customElements.define("my-hello", Hello);
-
-export default Hello;
