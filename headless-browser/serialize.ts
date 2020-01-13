@@ -12,9 +12,8 @@ export function serialize(rootNode) {
                 const scriptData = document.createElement('script');
                 const attributesProperties = node.getAttributeNames()
                                                  .filter(name => name !== 'data-ssr')
-                                                 .reduce((obj, name) => {
-                                                     return {...obj, [name]: node[name]};
-                                                 }, {});
+                                                 .reduce((obj, name) => ({...obj, [name]: node.getAttribute(name)}), {});
+                
                 scriptData.setAttribute('type', 'ssr-data');
                 scriptData.innerHTML = JSON.stringify(attributesProperties);
 
