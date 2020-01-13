@@ -14,11 +14,12 @@ server.get('/', (req, res) => {
 });
 
 server.get('/ssr', async (req, res) => {
+	const name =  req.query.name || 'Felix';
 	const file = './public/pages/index.html';
 	// the web component to render
 	const Hello = require('./public/components/my-hello');
 	const hello = new Hello();
-	hello.textContent = 'Felix';
+	hello.textContent = name;
 	hello.setAttribute('greeting', 'Sias');
 
 	console.time('ssr');
@@ -26,8 +27,6 @@ server.get('/ssr', async (req, res) => {
 	const pageContent = await renderToPage(file, serializedHello);
 	console.timeEnd('ssr');
 	res.send(pageContent);
-
-
 });
 
 server.get('*', (req, res, next) => {
