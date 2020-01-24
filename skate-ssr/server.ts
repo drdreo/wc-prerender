@@ -6,6 +6,7 @@ import { renderToPage } from './utils';
 
 const server = express();
 const PORT = 3002;
+const timings = [];
 
 server.use(express.static('public'));
 
@@ -22,12 +23,19 @@ server.get('/ssr', async (req, res) => {
 	hello.textContent = name;
 	hello.setAttribute('greeting', 'Sias');
 
-	console.time('ssr');
+	const startTime = process.hrtime()
 	const serializedHello = await render(hello);
 	const pageContent = await renderToPage(file, serializedHello);
-	console.timeEnd('ssr');
+	const endTime = process.hrtime(startTime)[1] / 1000000;
+	timings.push(endTime);
+	console.info('time: %dms', endTime);
 	res.send(pageContent);
 });
+
+server.get('/avg', async (req, res) => {
+	res.json({data: timings, total: timings.length -1, avg: timings.reduce((a,b) => a + b, 0) / timings.length});
+});
+
 
 server.get('*', (req, res, next) => {
 	console.log('Serving: ', req.url);
