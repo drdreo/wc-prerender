@@ -16,20 +16,18 @@ export function serialize(rootNode) {
                 
                 scriptData.setAttribute('type', 'ssr-data');
                 scriptData.innerHTML = JSON.stringify(attributesProperties);
-
-
+                
                 const slot = node.shadowRoot.querySelector('slot');
 
-                // move light nodes into shadowDom
-                lightDomNodes.forEach(lightNode => slot.parentNode.insertBefore(lightNode, slot));
+                // only move light nodes into shadow if there is a <slot>
+                if (slot) {
+                    // insert the light DOM right before the <slot>
+                    lightDomNodes.forEach(lightNode => slot.parentNode.insertBefore(lightNode, slot));
+                    slot.parentNode.removeChild(slot);
+                }
 
                 // move shadowDom into root node
                 node.shadowRoot.childNodes.forEach(shadowNode => node.appendChild(shadowNode));
-
-                // remove slot element
-                if (slot) {
-                    slot.parentNode.removeChild(slot);
-                }
 
                 // serialize custom element child nodes
                 serialize(node);
