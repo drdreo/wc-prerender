@@ -31,10 +31,6 @@ server.get('/avg', async (req, res) => {
 server.get('*', (req, res, next) => {
 	console.log('Serving: ', req.url);
 	let htmlFile = req.url;
-	// if (!req.url.includes('.html') && !req.url.includes('.')) {
-	//     htmlFile += '.ssr.html';
-	// }
-
 	res.sendFile(join(__dirname + '/public/pages/' + htmlFile));
 });
 
