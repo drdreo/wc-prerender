@@ -5,18 +5,27 @@ import { rehydrate } from './hydrate';
 
 const server = express();
 const PORT = 3001;
+
 server.use(express.static('public'));
 
 server.get('/', (req, res) => {
 	res.redirect('/index.ssr.html');
 });
 
+const timings = [];
 server.get('/ssr', async (req, res) => {
 	const file = '/public/pages/index.html';
-	console.time('ssr');
+
+	const startTime = process.hrtime()
 	const pageContent = await render(file);
-	console.timeEnd('ssr');
+	const endTime = process.hrtime(startTime)[1] / 1000000;
+	timings.push(endTime);
+	console.info('time: %dms', endTime);
 	res.send(pageContent.replace('</body>', `${rehydrate}</body>`));
+});
+
+server.get('/avg', async (req, res) => {
+	res.json({data: timings, total: timings.length -1, avg: timings.reduce((a,b) => a + b, 0) / timings.length});
 });
 
 server.get('*', (req, res, next) => {
