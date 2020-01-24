@@ -4,20 +4,14 @@ function hydrate() {
 
     for (const el of elements) {
         const lightDom = el.querySelector('[type="ssr-light-dom"]');
-        const lightDomContent = lightDom && lightDom.content;
         const dataElement = el.querySelector('[type="ssr-data"]');
         const dataContent = dataElement && dataElement.innerText;
         const data = dataContent && JSON.parse(dataContent);
 
-        el.childNodes.forEach(node => {
-            if (node !== lightDom) {
-                node.parentElement.removeChild(node);
-            }
-        });
+        // replace the whole light DOM
+        el.innerHTML = lightDom.innerHTML;
 
-        lightDomContent && lightDomContent.childNodes.forEach(node => el.appendChild(node));
-        lightDom && lightDom.parentElement.removeChild(lightDom);
-        dataElement && dataElement.parentElement && dataElement.parentElement.removeChild(dataElement);
+        //re-apply attributes
         data && Object.keys(data).forEach(key => {
             el[key] = data[key];
         });
@@ -26,5 +20,4 @@ function hydrate() {
     }
 }
 
-export const rehydrate = `<script>${hydrate.toString()}
-hydrate();</script>`;
+export const rehydrate = `<script>${hydrate.toString()} hydrate();</script>`;
