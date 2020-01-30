@@ -12,6 +12,15 @@ The key intention, which might be obsolete these days, is that functionality sho
 Therefore, the goal is to pre-render Web Components to provide a vanilla HTML alternative until the actual component is ready to display and exchange it afterwards.
 
 
+## Installation
+The code was developed using Node.js v10.15.3 and npm v6.9.0. 
+To install and test the source code, clone the repository and execute `npm install` in each directory to make sure all dependencies are being installed correctly.
+
+## Running
+
+The command `npm run render` triggers a single rendering which takes an example HTML file and creates a new, serialized version of it in the "public/pages" directory.
+A server can be started using `npm start`. This will serve a local server at http://localhost:3001/ssr for the headless browser or http://localhost:3002/ssr for the DOM API. The route `/avg` keeps track and displays the current average measurement.
+
 ### Appendix
 Stencil Approach
 https://github.com/ionic-team/stencil/blob/143e07ea58a67c9bc16209c1c2a5d32a13f50b60/src/mock-doc/serialize-node.ts
